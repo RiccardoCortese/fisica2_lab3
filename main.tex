@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{pgfplots}
+\usepackage{ragged2e}
+\usepackage{circuitikz}
+\usepackage{ragged2e}
+\usepackage{showlabels}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage[italian]{babel}
+\newcommand{\showlabel}[1]{\textbf{#1}\label{#1}}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\begin{document}
+\justifying
+
+\begin{center}
+    {\fontsize{36}{43.2}\selectfont Relazione di laboratorio 3 - Gruppo D6/D10}
+\end{center}
+\noindent
+\textbf{Componenti gruppo:} Cortese Riccardo, Lana Mirko
+
+\section*{Materiale Utilizzato e circuito usato per l'esperienza}
+
+Durante l'esecuzione del laboratorio è stato utilizzato il seguente materiale:
+\begin{itemize}
+    \item breadboard;
+    \item cavi bnc, banana-banana e banana-bnc;
+    \item resistori \((1k\Omega, 10k\Omega)\);
+    \item capacitori \((1nF, 10nF, 100nF)\);
+    \item decade di induttanze;
+    \item filetti;
+    \item generatore di forme d'onda;
+    \item oscilloscopio.
+\end{itemize}
+
+\input{figures/circuito}
+
+\section{Diagramma ingresso-uscita (Diagramma di Bode)}
+
+\subsection{Obiettivo}
+Con riferimento al circuito di \textit{Figura 1} utilizzando le seguenti combinazioni di R, L, C:
+\begin{itemize}
+    \item $R = 10 k\Omega, L = 500 mH$ e $C = 10 nF$;
+    \item $R = 1 k\Omega, L = 500 mH$ e $C = 10 nF$;
+\end{itemize}
+
+si determini il diagramma di Bode del circuito. Si utilizzi una forma d'onda sinusoidale di ampiezza picco-picco $V_{in}^{pp} = 5 V$ con offset paro a zero ($V_{in}^{of} = 0 V$ ). Si utilizzino frequenze da 1 Hz a 50 kHz opportunamente scelte. Si misuri l'ampiezza della forma d'onda in entrata ($V_{in}^{p}$) ed uscita ($V_{out}^{p}$) e la differenza in fase tra le due forme d'onda. 
+
+Si riportino i risultati in due grafici distinti.
+
+Si verifichi se il comportamento del circuito è coerente con le aspettative.
+
+Si stimi la resistenaza parrasita in serie all'induttore nel caso $R = 1 k\Omega, L = 500 mH$ e $C = 10 nF$.
+
+\subsection{Dati sperimentali}
+Di seguito riportiamo due tabelle contenenti le tensioni misurate ad ogni istante di tempo per le diverse combinazioni di R, L e C.
+
+\input{tables/table_1_dati_sperimentali}
+
+E' stato scelto di misurare la tensione \textit{$V_{out}$} ad intervalli di frequenza, nel range 1 Hz a 50 Hz, secondo una distribuzione logaritmica.
+
+Oltre a questi dati è stata misurata la tensione \textit{$V_{out}$} nei punti di $f_0$ e $f_{-3db}$ per le due combinazione di R, L e C. 
+
+I dati raccolti si fermano al raggiungimento di frequenza $f = 10 kHz$ in quanto, avendo a disposizione dei cavi lunghi come collegamento tra la decade di induttanze e la breadbord, essi introducevano una induttanza parassita che rendeva l'uscita (Vout) instabile e quindi difficile da misurare.
+
+A puro scopo didattico, abbiamo provato a visualizzare il segnale d'uscita nell'oscilloscopio quando la frequeza $f = 50 kHz$ e abbiamo notato che ad ogni spostamento dei due fili che collegavano la decade di induttanze con la breadbord, il segnale in uscita mutava di volta in volta.
+
+\subsection{Diagrammi di Bode}
+Di seguito riportiamo i diagrammi di Bode, ampiezza e fase, relativi alle due combinazioni di R, L e C:
+
+\subsection{Conclusioni}
+Dopo aver calcolato e riportato i diagrammi di Bode per le rispettive combinazioni R, L, e C, possiamo notare come nel primo caso i dati sperimentali rispecchiano l'andamento della curava teorica, invece nel secondo caso i punti relativi ai dati sperimentali appaiono sottostanti la curva teorica e inoltre a $f_0$ la tensione $V_{out}^{sperimentale} \ll V_{in}$. Questo avviene perchè possiamo immaginare che l'induttore \textit{L} al suo interno abbia una resistenza parassita che determina il calo di tensione. 
+
+Per trovare questa resistenza parassita possiamo immaginare di avere una resistenza $R_L$ in serie all'induttore $L$; e per trovare il valore di resistenza di $R_L$ possiamo immaginare di togliere per un momento gli elementi circuitali $C$ e $L$ in modo così di avere un partitore resistivo.
+
+Dalle formule del partitore resistivo: \(V_{out} = \frac{V_{in} \cdot R}{R + R_L}\).
+
+$R_L$ risulterà dunque: \(R_L = \frac{V_{in} \cdot R }{V_{out}} - R \approx 47.120 \Omega \)
+
+
+\end{document}

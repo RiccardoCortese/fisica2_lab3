@@ -1,0 +1,25 @@
+\begin{figure}[h!]
+\centering
+\resizebox{0.35\textwidth}{!}{
+    \begin{circuitikz}
+        % Vin source
+        \draw (0,0) to[vsourcesin, l=$V_{\text{in}}(t)$] (0,3) 
+            -- (2,3) 
+            to[C, l=$C$] (4,3) 
+            to[L, l=$L$] (6,3)
+            -- (8,3) 
+            to[R, l=$R$] (8,0) 
+            -- (0,0);
+    
+        % Ground connection
+        \draw (8,0) node[ground] {};
+    
+        % Vout connection
+        \draw (8,3) -- ++(1,0) node[above] {$+$};
+        \draw (8,0) -- ++(1,0) node[below] {$-$};
+        \node[right] at (9,1.5) {$V_{\text{out}}(t)$};
+    \end{circuitikz}
+    }
+    \caption{Circuito per l'Esercizio 1 e 2}
+    
+\end{figure}

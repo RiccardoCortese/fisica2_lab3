@@ -76,16 +76,41 @@ I dati raccolti si fermano al raggiungimento di frequenza $f = 10 kHz$ in quanto
 A puro scopo didattico, abbiamo provato a visualizzare il segnale d'uscita nell'oscilloscopio quando la frequeza $f = 50 kHz$ e abbiamo notato che ad ogni spostamento dei due fili che collegavano la decade di induttanze con la breadbord, il segnale in uscita mutava di volta in volta.
 
 \subsection{Diagrammi di Bode}
-Di seguito riportiamo i diagrammi di Bode, ampiezza e fase, relativi alle due combinazioni di R, L e C:
+Di seguito riportiamo i diagrammi di Bode, ampiezza e fase, relativi alle due combinazioni di R, L e C.
+
+\noindent
+I diagrammi sperimentali per l’ampiezza e per la fase si ottengono rispettivamente con le seguenti funzioni:
+
+\begin{minipage} [t]{0.45\textwidth}
+    \begin{equation}
+        dB = 20log \bigg ( \frac{V_{out}}{V_{in}} \bigg)
+    \end{equation}
+\end{minipage}
+\hfill
+ \begin{minipage} [t]{0.45\textwidth}
+    \begin{equation}
+        \phi[rad] = \frac{\Delta t}{2 \pi \cdot T} 
+    \end{equation}
+\end{minipage}
+
+ 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/diagramma_bode_1.png}
+\end{figure}
+\noindent
+
+I diagrammi sono stati generati tramite codice pythom da noi implementato.
 
 \subsection{Conclusioni}
-Dopo aver calcolato e riportato i diagrammi di Bode per le rispettive combinazioni R, L, e C, possiamo notare come nel primo caso i dati sperimentali rispecchiano l'andamento della curava teorica, invece nel secondo caso i punti relativi ai dati sperimentali appaiono sottostanti la curva teorica e inoltre a $f_0$ la tensione $V_{out}^{sperimentale} \ll V_{in}$. Questo avviene perchè possiamo immaginare che l'induttore \textit{L} al suo interno abbia una resistenza parassita che determina il calo di tensione. 
+Dopo aver calcolato e riportato i diagrammi di Bode per le rispettive combinazioni R, L, e C, possiamo notare come nel primo caso i dati sperimentali rispecchiano l'andamento della curava teorica, a meno di errori sperimentali ;nel secondo caso i punti relativi ai dati sperimentali appaiono sottostanti la curva teorica e inoltre a $f_0$ la tensione $V_{out}^{sperimentale} \ll V_{in}$. Questo avviene perchè possiamo immaginare che l'induttore \textit{L} al suo interno abbia una resistenza parassita che determina il calo di tensione. 
+Questo avviene perchè l’induttanza è formata da un cavo elettrico attraversato da corrente che si avvolge su se stesso moltissime volte. Più un cavo è lungo più la resistenza parassita è grande
 
 Per trovare questa resistenza parassita possiamo immaginare di avere una resistenza $R_L$ in serie all'induttore $L$; e per trovare il valore di resistenza di $R_L$ possiamo immaginare di togliere per un momento gli elementi circuitali $C$ e $L$ in modo così di avere un partitore resistivo.
 
 Dalle formule del partitore resistivo: \(V_{out} = \frac{V_{in} \cdot R}{R + R_L}\).
 
-$R_L$ risulterà dunque: \(R_L = \frac{V_{in} \cdot R }{V_{out}} - R \approx 47.120 \Omega \)
+$R_L$ risulterà dunque: \(R_L = \frac{V_{in} \cdot R }{V_{out}} - R \approx 545.117 \Omega \)
 
 
 \end{document}

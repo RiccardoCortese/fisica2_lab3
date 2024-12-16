@@ -1,33 +1,33 @@
-\documentclass{article}
-\usepackage{graphicx} 
-\usepackage{amsmath, amsthm, amssymb, amsfonts}
-\usepackage{float}
-\usepackage{titlesec}
-\usepackage{geometry}
-\usepackage{pgfplots}
-\usepackage{ragged2e}
-\usepackage{circuitikz}
-\usepackage{ragged2e}
-\usepackage{showlabels}
-\usepackage{siunitx}
-\usepackage{booktabs}
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
-\newcommand{\showlabel}[1]{\textbf{#1}\label{#1}}
-\geometry{
-    a4paper,
-    total={170mm,257mm},
-    left=20mm,
-    top=20mm,
-}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}      % Per migliorare l'allineamento delle celle
+\usepackage{booktabs}   % Per linee professionali nella tabella
+\usepackage{multicol}
+\usepackage{subcaption} % Per i sottotitoli dei subplot
+\usepackage{caption}    % Per gestire le didascalie delle figure
+\usepackage{circuitikz} % Per disegnare circuiti
+
+
+\sisetup{per-mode=symbol, detect-all=true}
+
+% Impostazioni per il titolo e l’aspetto generale
+\title{\Large\textbf{Terza Esercitazione di Laboratorio}\\ \vspace{0.5em} \large Circuiti RLC in corrente alternata}
+\author{\textbf{Gruppo D6/D9:} Cortese Riccardo, Lana Mirko, Saif Edine Safi, Mattia Fait}
+\date{\textbf{Novembre 2024}}
+
 
 \begin{document}
-\justifying
-
-\begin{center}
-    {\fontsize{36}{43.2}\selectfont Relazione di laboratorio 3 - Gruppo D6/D10}
-\end{center}
-\noindent
-\textbf{Componenti gruppo:} Cortese Riccardo, Lana Mirko
+\maketitle
+\tableofcontents % Aggiunge un indice interattivo
+\newpage
 
 \section*{Materiale Utilizzato e circuito usato per l'esperienza}
 
@@ -96,13 +96,13 @@ I diagrammi sperimentali per l’ampiezza e per la fase si ottengono rispettivam
  
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/diagramma_bode_1.png}
+    \includegraphics[width=0.7\linewidth]{figures/diagramma_bode_1.png}
 \end{figure}
 \noindent
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/diagramma_bode_2.png}
+    \includegraphics[width=0.7\linewidth]{figures/diagramma_bode_2.png}
 \end{figure}
 \noindent
 
@@ -117,6 +117,189 @@ Per trovare questa resistenza parassita possiamo immaginare di avere una resiste
 Dalle formule del partitore resistivo: \(V_{out} = \frac{V_{in} \cdot R}{R + R_L}\).
 
 $R_L$ risulterà dunque: \(R_L = \frac{V_{in} \cdot R }{V_{out}} - R \approx 545.117 \Omega \)
+
+
+\section{Risposta al gradino del circuito RLC}
+
+\begin{multicols}{2}
+\subsection{Setup sperimentale}
+
+\begin{itemize}
+    \item \textbf{Configurazione circuitale}:
+        \begin{itemize}
+            \item \textit{circuito RLC in serie} (Figura 1).
+        \end{itemize}
+    \item \textbf{Segnale in input}:
+        \begin{itemize}
+            \item \textit{Onda quadra};
+            \item Frequenza: \(10 \si{\hertz}\);
+            \item Tensione picco-picco: \(2.5 \si{\volt}\);
+            \item Offset: \(1.25 \si{\volt}\).
+        \end{itemize}
+    \item \textbf{Configurazione di test}:
+        \begin{itemize}
+            \item \(R=10 \si{\kilo \ohm}, L = 500 \si{\milli \henry}, C = 1 \si{\nano \farad}\);
+            \item \(R= 10 \si{\kilo \ohm}, L = 500 \si{\milli \henry}, C= 10 \si{\nano \farad}\);
+            \item \(R= 10 \si{\kilo \ohm}, L = 100 \si{\milli \henry}, C = 10 \si{\nano \farad}\).
+        \end{itemize}
+\end{itemize}
+
+\subsection{Obiettivo}
+
+\begin{itemize}
+    \item Caratterizzare qualitativamente la \textit{risposta del circuito RLC}:
+        \begin{itemize}
+            \item Analizzare come il circuito risponde a \textit{differenti valori di L e C};
+            \item Focus sulle \textit{frequenze naturali} e \textit{soluzioni del polinomio caratteristico}.
+        \end{itemize}
+    \item Per la configurazioni \(R = 10 \si{\kilo \ohm}, L = 500 \si{\milli \henry}, C = 1 \si{\nano \farad}\):
+        \begin{itemize}
+            \item Determinare la \textit{frequenza di oscillazione};
+            \item Confrontare il \textit{valore atteso} con quello \textit{osservato}.
+        \end{itemize}
+\end{itemize}
+
+\end{multicols}
+
+
+\subsection{Considerazioni}
+
+\begin{itemize}
+    \item \textbf{Equazione differenziale del circuito RLC}:
+        \begin{itemize}
+            \item L'evoluzione del circuito è descritta dall'equazione differenziale
+                \begin{equation}
+                    L(di/dt)+Ri+(1/C) \int i dt =V_{in}(t)
+                \end{equation}
+        \end{itemize}
+    \item \textbf{Frequenza naturale}:
+        \begin{itemize}
+            \item La frequenza naturale (\(\omega_n\)) espressa in \(\si{\radian / \second}\) è data da 
+                \begin{equation}
+                    \omega_n = \frac{1}{\sqrt{LC}}
+                \end{equation}
+            \item La frequenza naturale (\(f_n\)) espressa in \(\si{\hertz}\) è data da:
+                \begin{equation}
+                    f_n = \frac{\omega_n}{2 \pi}
+                \end{equation}
+        \end{itemize}
+    \item \textbf{Fattore di smorzamento (Damping Ratio)}:
+        \begin{equation}
+            \zeta = \frac{R}{2 \sqrt{L/C}}
+        \end{equation}
+        \begin{itemize}
+            \item \(\zeta > 1\) : \textit{Sovrasmorzato} (overdamped);
+            \item \(\zeta = 1\) : \textit{Criticamente smorzato};
+            \item \(\zeta < 1\) : \textit{Sottosmorzato} (underdamped);
+        \end{itemize}
+\end{itemize}
+
+\subsection{Analisi del circuito RLC}
+
+\subsubsection{Caso 1}
+
+
+Per la configurazione \(R=10 \si{\kilo \ohm}, L = 500 \si{\milli \henry}, C = 1 \si{\nano \farad}\) sono stati misurati i seguenti dati:
+
+
+\begin{table}[h!]
+    \centering
+        \centering
+        \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Picco di tensione} [\(\si{\milli \volt}\)] & \textbf{Zero misurato} [\(\si{\mu \second}\)] \\
+        \hline
+        762.5 & 73  \\
+        \hline
+        355.0 & 146 \\
+        \hline
+        172.5 & 216 \\
+        \hline
+        75.0 & 288 \\
+        \hline
+        12.5 & 361 \\
+        \hline
+        \end{tabular}
+        \caption{Ampiezza misurata in valore assoluto e Zeri di tensione.}
+\end{table}
+    
+
+\begin{itemize}
+    \item \textbf{Frequenza naturale in radianti}
+        \[\omega_n = \frac{1}{\sqrt{(500 \si{\milli \henry})\cdot(1 \si{\nano \farad})})} \approx 44721 \si{\radian / \second}\]
+
+    \item \textbf{Frequenza naturale in hertz}
+        \[f_n = \frac{\omega_n}{2 \pi} \approx 7118 \si{\hertz}\]
+
+    \item \textbf{Frequenza di oscillazione} \\
+        La frequenza di oscillazione sperimentale \(f_o=\frac{\omega_o}{2 \pi}\) si può ricavare dal periodo di oscillazione \(T_o\) della curva in uscita, infatti \(f_o = \frac{1}{T_o}\).   \\
+        Il periodo di oscillazione è il tempo che impiega la curva per effettuare un'oscillazione completa.
+        
+        \[T_o = 72 \si{\mu \second} \cdot 2 = 144 \si{\mu \second} \Rightarrow f_o = \frac{1}{144 \si{\mu \second}} \approx 6944 \si{\hertz}\]
+
+        Il risultato sperimentale è in accordo con il risultato teorico, pur essendoci un errore pari a \(f_n -f_o \approx 174 \si{\hertz}\), dovuto probabilmente alla sensibilità della strumentazione di laboratorio.
+    
+    \item \textbf{Fattore di smorzamento}
+        \[\zeta = \frac{10 \si{\kilo \ohm}}{2 \cdot \sqrt{(500 \si{\milli \henry})/(1 \si{\nano \farad})}} \approx 0.224\]
+        Poiché \(\zeta <1\), il circuito è sottosmorzato e la risposta sarà oscillante e la soluzione sarà caratterizzata da una smorzatura epsonenziale descritta da
+        \[L \frac{d^2 e^{\lambda t}}{dt}+R \frac{d e^{\lambda t}}{dt} + \frac{2^{\lambda t}}{C} =0\]
+        \(\forall \, \lambda = -\zeta \omega_0 \pm j \omega_0 \sqrt{1- \zeta^2}\). \\
+        La risposta al gradino avrà quindi oscillazioni che decresceranno nel tempo, come è stato provato dalle misure sperimentali mostrate in Figura 2.
+
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.4\textwidth]{figures/regr_exp.png}
+            \caption{Oscillazioni sperimentali decrescenti nel tempo.}
+        \end{figure}
+
+\end{itemize}
+
+
+%\newpage
+
+\subsubsection{Caso 2}
+
+\(R= 10 \si{\kilo \ohm}, L = 500 \si{\milli \henry}, C= 10 \si{\nano \farad}\);
+
+
+\begin{itemize}
+    \item \textbf{Frequenza naturale in radianti}
+        \[\omega_n = \frac{1}{\sqrt{(500 \si{\milli \henry})\cdot(10 \si{\nano \farad})})} \approx 14142 \si{\radian \second}\]
+
+    \item \textbf{Frequenza naturale in hertz}
+        \[f_n = \frac{\omega_n}{2 \pi} \approx 2251 \si{\hertz}\]
+    \item \textbf{Fattore di smorzamento}
+        \[\zeta = \frac{10 \si{\kilo \ohm}}{2 \cdot \sqrt{(500 \si{\milli \henry})/(10 \si{\nano \farad})}} \approx 0.707\]
+        Circuito sottosmorzato.
+        \[L \frac{d^2 e^{\lambda t}}{dt}+R \frac{d e^{\lambda t}}{dt} + \frac{2^{\lambda t}}{C} =0\]
+        \(\forall \, \lambda = -\zeta \omega_0 \pm j \omega_0 \sqrt{1- \zeta^2} \). \\
+        La risposta mostrerà oscillazioni, ma il loro smorzamento sarà più rapido rispetto al caso precedente, grazie ad un fattore di smorzamento più alto. \\
+        La risposta si stabilizzerà più velocemente.
+\end{itemize}
+
+
+
+
+\subsubsection{Caso 3}
+
+\(R= 10 \si{\kilo \ohm}, L = 100 \si{\milli \henry}, C = 10 \si{\nano \farad}\).
+
+
+\begin{itemize}
+    \item \textbf{Frequenza naturale in radianti}
+        \[\omega_n = \frac{1}{\sqrt{(100 \si{\milli \henry})\cdot(1 \si{\nano \farad})})} \approx 31623 \si{\radian \second}\]
+    \item \textbf{Frequenza naturale in hertz}
+        \[f_n = \frac{\omega_n}{2 \pi} \approx 5033 \si{\hertz}\]
+    \item \textbf{Fattore di smorzamento}
+        \[\zeta = \frac{10 \si{\kilo \ohm}}{2 \cdot \sqrt{(100 \si{\milli \henry})/(1 \si{\nano \farad})}} \approx 1.58\]
+        Poiché il circuito è sovrasmorzto (\(\zeta > 1\)), la risposta non oscillerà ma crescerà lentamente verso il valore finale e la soluzione caratteristica sarà caratterizzata da una smorzatura esponenziale descritta da 
+        \[L \frac{d^2 e^{\lambda t}}{dt}+R \frac{d e^{\lambda t}}{dt} + \frac{2^{\lambda t}}{C} =0\]
+        \(\forall \, \lambda = \frac{-R \pm \sqrt{R^2 -4L \cdot \frac{1}{C}}}{2L}\).\\
+        La risposta a un ingresso a gradino vedrà un'espansione iniziale senza oscillazioni, ma ci vorrà più tempo per raggiungere il valore finale.
+
+\end{itemize}
+
+
 
 
 \end{document}
